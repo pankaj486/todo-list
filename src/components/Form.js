@@ -16,6 +16,16 @@ const Form = () => {
         setText('')
     }
 
+    const deleteTodo = (id) => {
+        setItems((prevItem) => {
+            return prevItem.filter(
+                (item, index) => {
+                    return index !== id;
+                }
+            )
+        })
+    }
+
     return (
         <div className="ui form"> 
             <div className="field">
@@ -26,8 +36,13 @@ const Form = () => {
                 <button onClick={handlerChange}>Add</button>
                 <div>
                     <ul>
-                        {items.map((todoItem) => {
-                           return <TodoItems term={todoItem}/>
+                        {items.map((todoItem, index) => {
+                           return <TodoItems
+                            key={index}
+                            id={index} 
+                            term={todoItem} 
+                            onChecked={deleteTodo}
+                            />
                         })}
                     </ul>
                 </div>
