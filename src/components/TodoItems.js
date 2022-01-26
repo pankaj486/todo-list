@@ -1,27 +1,41 @@
-import React, {useState} from "react";
+import React,{useState} from "react";
 
 
 
 
-const TodoItems = ({ term, onChecked, id }) => {
+const TodoItems = ({ title, date, onDelete, id, comDate}) => {
 
     const [isDone, setIsDone] = useState(false);
 
-    const handleClick = () => {
-        setIsDone((prevValue) => {
-            return !prevValue;
+    const handlerChange = () => {
+        setIsDone((prevItem) => {
+            return !prevItem;
         })
     }
 
+
+    const handlerDelete = () => {
+        onDelete(id);
+    }
+
+
     return (
-        <div>
-            <li style={{textDecoration: isDone ? 'line-through' : 'none'}}>{term}</li>
-            <input onClick={handleClick} type="checkbox"></input>
-            <button 
-            onClick={() => {
-                onChecked(id)
-            }}
-            >Delete</button>
+        <div className="ui container center aligned">
+            <div style={{marginTop: '40px'}}>
+            <div className="ui cards">
+             <div className="content ui segment">
+                <a className="header" style={{fontSize:'1.5rem', textDecoration: isDone ? "line-through" : "none"}}>{title}
+                </a>
+                <input style={{marginLeft:'3px'}} type="checkbox" onClick={handlerChange}></input>
+                <div className="meta">
+                <span className="date">{date}</span>
+                </div>
+                <div className="description">
+                <button className="ui button" onClick={handlerDelete}>Delete</button>
+                </div>
+            </div>
+            </div>
+        </div>
         </div>
     );
 }

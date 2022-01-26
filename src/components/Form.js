@@ -6,16 +6,22 @@ import TodoItems from "./TodoItems";
 const Form = () => {
 
     const [text, setText] = useState('');
+    const [date, setDate] = useState('');
     const [items, setItems] = useState([]);
 
-
+    
+    // const [changeDate, setChangeDate] = useState([]);
+    console.log(items);
     const handlerChange = () => {
         setItems((prev) => {
-            return [...prev, text]
+            return [...prev, text, date]
         });
-        setText('')
+        // set((prev) => {
+        //     return [...prev, date]
+        // })
+        setText('');
+        setDate('');
     }
-
     const deleteTodo = (id) => {
         setItems((prevItem) => {
             return prevItem.filter(
@@ -31,6 +37,9 @@ const Form = () => {
             <div className="field">
                 <label>Enter Todo</label>
                 <input onChange={(e) => setText(e.target.value)} value={text}></input>
+                <br />
+                <br />
+                <input name="date" type="date" onChange={(e) => setDate(e.target.value)} value={date}></input>
                 <br />
                 <br />
                 <button onClick={handlerChange}>Add</button>
